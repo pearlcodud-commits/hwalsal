@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>화살나무 읽기 놀이터</title><style>
+:root{--bg:#fff6e5;--cd:#fff;--tx:#2b2540;--ln:#eadcc0;--pr:#ff6b4a;--gr:#1fae74;--bl:#3d7bff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1b1830;--cd:#2a2548;--tx:#f5f0ff;--ln:#463f70;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#1b1830;--cd:#2a2548;--tx:#f5f0ff;--ln:#463f70;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:"Noto Sans KR","Malgun Gothic",sans-serif;background:var(--bg);color:var(--tx);padding:12px;font-size:17px;line-height:1.5}
+h2{margin:4px 0 8px}h3{margin:6px 0}button,input,textarea,select{font:inherit;color:var(--tx)}
+.hd{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;border-radius:20px;color:#fff;background:linear-gradient(120deg,#ff6b4a,#ffb84d,#1fae74,#3d7bff);background-size:300% 300%;animation:bg 10s ease infinite;margin-bottom:10px}
+@keyframes bg{50%{background-position:100% 100%}}
+.hd h1{margin:0;font-size:22px;flex:1;min-width:150px}#tree{font-size:46px;animation:bob 2s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-6px) rotate(6deg)}}
+.stat{background:#0004;border-radius:999px;padding:4px 14px;font-weight:800}.stk{font-size:26px;opacity:.25;filter:grayscale(1)}.stk.got{opacity:1;filter:none;animation:pop .6s}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.5)}}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.btn,nav button{border-radius:999px;padding:8px 14px;font-weight:700;background:var(--cd);border:2px solid var(--ln);cursor:pointer}
+nav button.on,.btn.p{background:var(--pr);color:#fff;border-color:var(--pr)}nav button.lock{opacity:.4}.btn:disabled{opacity:.4}
+.sec{display:none;background:var(--cd);border:2px solid var(--ln);border-radius:20px;padding:14px}.sec.on{display:block}
+.card{display:block;width:100%;text-align:left;margin:8px 0;padding:10px 12px;border-radius:14px;border:2px solid var(--ln);background:var(--bg)}
+button.card{cursor:pointer}.card.sel{border-color:var(--pr);box-shadow:0 0 0 3px #ff6b4a55;transform:scale(1.02)}
+.card.ok{border-color:var(--gr);background:#1fae7422}.card.no{border-color:#e5484d;background:#e5484d33}
+.shake{animation:sk .4s}@keyframes sk{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.baskets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.bsk{border:4px dashed;border-radius:18px;padding:8px;min-height:150px;cursor:pointer;background:var(--bg)}
+.badge{display:inline-block;color:#fff;border-radius:999px;padding:1px 12px;font-weight:800;font-size:14px}
+.arena{position:relative;height:300px;overflow:hidden;border-radius:16px;background:linear-gradient(#7cc6ff,#d9f5c9 72%,#5db85d)}
+.tg{position:absolute;left:-45%;padding:8px 14px;border-radius:999px;background:#fff;color:#222;border:3px solid var(--pr);font-weight:800;cursor:pointer;white-space:nowrap;animation:fly linear infinite}
+@keyframes fly{from{left:-45%}to{left:105%}}.tg.hit{background:#ffe066;transform:scale(1.3)}.tg.bad{opacity:.35;pointer-events:none}
+.bow{position:absolute;bottom:2px;left:50%;font-size:34px;transform:translateX(-50%)}.arw{position:absolute;font-size:28px;transition:all .45s ease-in;pointer-events:none;z-index:5}
+.big{font-size:clamp(40px,12vw,72px);font-weight:900;letter-spacing:6px;text-align:center;margin:10px 0;color:var(--pr);animation:pop .5s}
+.dots{display:flex;gap:4px;justify-content:center;flex-wrap:wrap}.dots i{width:14px;height:14px;border-radius:50%;background:var(--ln)}.dots i.d{background:var(--gr)}.dots i.c{background:var(--pr);transform:scale(1.3)}
+.row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;margin:8px 0}
+input,textarea,select{border:2px solid var(--ln);border-radius:10px;padding:6px 10px;background:var(--bg);max-width:100%}textarea{width:100%}
+.chip{border:2px solid var(--ln);background:var(--bg);border-radius:999px;padding:3px 10px;margin:3px 3px 3px 0;font-size:15px;cursor:pointer}
+.pass{background:#fffbe8;color:#2b2540;border-radius:14px;padding:10px 14px;border:2px solid #ffd966}.pass p{margin:6px 0}
+.cf{position:fixed;top:-30px;font-size:26px;z-index:99;pointer-events:none;animation:fall 2.4s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.lf{position:fixed;top:-40px;font-size:22px;opacity:.35;pointer-events:none;animation:fall 14s linear infinite;z-index:0}
+.ov{position:fixed;inset:0;background:#000a;z-index:90;display:flex;align-items:center;justify-content:center;padding:16px}
+.pop{background:var(--cd);border-radius:28px;padding:22px;text-align:center;max-width:340px;border:5px solid #ffc83d;animation:pop .5s}.big2{font-size:84px;animation:bob 1.2s infinite}
+.cert{border:8px double #e0a800;border-radius:18px;padding:16px;text-align:center;background:#fffbe8;color:#2b2540}
+a{color:var(--bl);font-weight:700}.note{background:#ffc83d33;border-radius:12px;padding:8px 12px}
+</style></head><body>
+<div class="hd"><span id="tree">🌰</span><h1>🌿 화살나무 읽기 놀이터 🏹</h1><span class="stat">⭐ <b id="stars">0</b></span><span id="stks"></span><button class="btn" id="tch">🔓 선생님: 모두 열기</button></div>
+<nav></nav><div id="main"></div>
+<script>
+const $=s=>document.querySelector(s),E=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const sh=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+const PH=['읽기 전','읽기 중','읽기 후'],PC=['#3d7bff','#1fae74','#ff8a1f'],TREE=['🌰','🌱','🌿','🌼','🌳','🍁','🏆'],STK=['🔤','🧺','🏹','🔍','📖','✍️'],RM=['초성 박사!','바구니 척척!','명사수!','탐정의 눈!','독서왕!','멋진 작가!'];
+const S={stars:0,un:0,t:0},A=[],M={},built=[],secs=[];
+function conf(){for(let i=0;i<40;i++){const e=E('span','cf',['🌿','🏹','⭐','🍁','🎉'][i%5]);e.style.left=Math.random()*100+'vw';e.style.animationDelay=Math.random()*.8+'s';document.body.append(e);setTimeout(()=>e.remove(),3300)}}
+for(let i=0;i<8;i++){const l=E('span','lf','🍃');l.style.left=(i*13+3)+'vw';l.style.animationDelay=-i*2+'s';document.body.append(l)}
+const STG=[['🔤','초성퀴즈',s1],['🧺','바구니',s2],['🏹','화살',s3],['🔍','읽기 전',s4],['📖','읽기 중',s5],['✍️','읽기 후',s6],['🏆','상장',s7]];
+STK.forEach(s=>$('#stks').append(E('span','stk',s)));
+STG.forEach(([ic,nm],i)=>{const b=E('button','st',ic+' '+nm);b.onclick=()=>go(i);$('nav').append(b);const s=E('section','sec');secs.push(s);$('#main').append(s)});
+$('#tch').onclick=()=>{S.t=1;upd()};
+function upd(){$('#tree').textContent=TREE[Math.min(S.un,6)];$('#stars').textContent=S.stars;document.querySelectorAll('.st').forEach((b,i)=>b.classList.toggle('lock',i>S.un&&!S.t));document.querySelectorAll('.stk').forEach((s,i)=>s.classList.toggle('got',i<S.un))}
+function star(n){S.stars+=n;upd()}
+function go(i){if(i>S.un&&!S.t)return;document.querySelectorAll('.st').forEach((b,j)=>b.classList.toggle('on',j==i));secs.forEach((s,j)=>s.classList.toggle('on',j==i));if(!built[i]){built[i]=1;STG[i][2](secs[i])}scrollTo(0,0)}
+function finish(i){if(S.un<=i)S.un=i+1;star(5);const o=E('div','ov',`<div class=pop><div class=big2>${STK[i]}</div><h2>${RM[i]}</h2><p>스티커 획득! ⭐ +5<br>나무가 자랐어요 ${TREE[i+1]}</p><button class="btn p">다음 단계로 ▶</button></div>`);o.querySelector('button').onclick=()=>{o.remove();go(i+1)};document.body.append(o);conf()}
+
+/* 1 초성퀴즈: 하나 맞히면 다음 문제 */
+const cho=s=>[...s].map(c=>{const n=c.charCodeAt(0)-44032;return n>=0&&n<11172?'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ'[Math.floor(n/588)]:c}).join('');
+const CH=[['소나무','잎이 바늘처럼 뾰족하고 사계절 푸르러요'],['은행나무','부채꼴 잎이 노랗게 물들어요'],['단풍나무','잎이 손바닥 모양, 가을에 빨개져요'],['버드나무','가지가 길게 늘어져 물가에 많아요'],['감나무','가을에 주황색 열매, 곶감을 만들어요'],['대추나무','작고 붉은 열매를 차나 약으로 써요'],['잣나무','솔방울 속에 고소한 씨앗이 있어요'],['느티나무','마을 어귀의 커다란 정자나무예요'],['향나무','좋은 향기가 나서 향을 피울 때 써요'],['배롱나무','여름 내내 붉은 꽃이 피고 껍질이 매끈해요'],['두릅나무','봄에 새순을 나물로 먹어요'],['자작나무','하얀 껍질, 불에 타면 자작자작 소리가 나요'],['측백나무','납작한 잎, 울타리로 많이 심어요'],['오동나무','잎이 크고 보랏빛 꽃, 가야금을 만드는 나무'],['화살나무','⭐오늘 읽을 글의 주인공! 가지에 코르크 날개가 있어요']];
+function s1(el){let i=0;function q(){if(i>=CH.length)return finish(0);const[a,h]=CH[i];el.innerHTML=`<h2>🔤 나무 이름 초성퀴즈 (${i+1}/${CH.length})</h2><div class=dots>${CH.map((_,j)=>`<i class="${j<i?'d':j==i?'c':''}"></i>`).join('')}</div><div class=big>${cho(a)}</div><p id=h style="text-align:center"></p><div class=row><input id=in size=9 placeholder="정답"><button class="btn p" id=ok>확인</button><button class=btn id=hb>💡 힌트</button></div><p id=m style="text-align:center;font-weight:800"></p>`;const inp=$('#in'),m=$('#m');let w=0;inp.focus();$('#hb').onclick=()=>$('#h').textContent='💡 '+h;const chk=()=>{if(inp.value.trim()==a){star(1);m.textContent='🎉 정답! '+a;$('#ok').disabled=true;conf();setTimeout(()=>{i++;q()},1200)}else{m.textContent='❌ 다시 생각해 봐요!';inp.classList.add('shake');setTimeout(()=>inp.classList.remove('shake'),450);if(++w>=2)$('#h').textContent='💡 '+h}};$('#ok').onclick=chk;inp.onkeydown=e=>{if(e.key=='Enter')chk()}}q()}
+
+/* 2 바구니 */
+const BK=[[0,'제목이나 차례를 보며 내용 예상하기'],[0,'내가 알고 있는 내용 떠올리기'],[0,'사진·그림을 보고 어떤 글일지 짐작하기'],[1,'글의 중심 생각 파악하기'],[1,'각 부분의 중심 내용 파악하기'],[1,'짐작한 내용이 맞는지 확인하기'],[1,'새롭게 안 내용 파악하기'],[1,'모르는 낱말의 뜻을 짐작하며 읽기'],[2,'글 전체의 내용을 요약하여 정리하기'],[2,'더 알고 싶은 내용 생각하기'],[2,'읽은 글에서 알게 된 점 친구와 나누기'],[2,'더 알고 싶은 내용을 찾아볼 계획 세우기']];
+function s2(el){let sel=null,n=0;el.innerHTML='<h2>🧺 읽기 활동 바구니</h2><p>카드를 누르고, 알맞은 바구니를 눌러요. <b id=bs>0 / 12</b></p><div id=bc></div><div class=baskets id=bb></div>';
+sh(BK).forEach(([p,t])=>{const c=E('button','card',t);c.onclick=()=>{if(sel)sel.c.classList.remove('sel');sel={p,c};c.classList.add('sel')};$('#bc').append(c)});
+PH.forEach((nm,i)=>{const b=E('div','bsk',`<h3 style="color:${PC[i]}">🧺 ${nm}</h3><div></div>`);b.style.borderColor=PC[i];b.onclick=()=>{if(!sel)return;const{p,c}=sel;sel=null;if(p==i){c.className='card ok';c.onclick=null;b.lastChild.append(c);star(1);$('#bs').textContent=++n+' / 12';if(n==12)setTimeout(()=>finish(1),700)}else{c.classList.remove('sel');c.classList.add('shake');setTimeout(()=>c.classList.remove('shake'),450)}};$('#bb').append(b)})}
+
+/* 3 화살 */
+const AQ=[['제목이나 ( )를 보며 내용 예상하기','차례',['글쓴이','쪽수','그림 크기']],['글의 ( ) 파악하기','중심 생각',['글자 수','쓴 날짜','글쓴이 나이']],['각 부분의 중심 내용 ( )','파악하기',['외우기','베껴 쓰기','지우기']],['( )한 내용이 맞는지 확인하기','짐작',['포기','복사','낭독']],['글 전체의 내용을 ( )하여 정리하기','요약',['확대','낭독','암기']],['‘읽기 전’ 활동은?','내용 예상하기',['요약하기','중심 생각 파악하기','짐작 확인하기']],['‘읽기 중’ 활동은?','새롭게 안 내용 파악하기',['차례 보기','요약하기','더 알고 싶은 내용 생각하기']],['‘읽기 후’ 활동은?','더 알고 싶은 내용 생각하기',['제목 보기','알고 있는 내용 떠올리기','새롭게 안 내용 파악하기']],['‘알고 있는 내용 떠올리기’는 언제 하나요?','읽기 전',['읽기 중','읽기 후','읽지 않을 때']]];
+function s3(el){let ai=0;function ar(){if(ai>=AQ.length){el.innerHTML='<h2>🏆 모든 과녁을 맞혔어요!</h2><button class="btn p" id=fb>보상 받기 🎁</button>';$('#fb').onclick=()=>finish(2);return}
+const[q,a,d]=AQ[ai];el.innerHTML=`<h2>🏹 화살 맞추기 (${ai+1}/${AQ.length})</h2><p><b style="font-size:20px">${q}</b></p><div class=arena id=ae><div class=bow>🏹</div></div><p id=am>움직이는 정답을 눌러 화살을 쏴요!</p>`;
+sh([a,...d]).forEach((t,i)=>{const g=E('div','tg',t);g.style.top=(10+i*62)+'px';g.style.animationDuration=(6+Math.random()*5)+'s';g.style.animationDelay=-Math.random()*8+'s';g.onclick=()=>{const ae=$('#ae');g.style.animationPlayState='paused';const r=g.getBoundingClientRect(),R=ae.getBoundingClientRect();const w=E('div','arw','➶');w.style.left=R.width/2+'px';w.style.top=R.height-40+'px';ae.append(w);requestAnimationFrame(()=>{w.style.left=(r.left-R.left+r.width/2-10)+'px';w.style.top=(r.top-R.top)+'px'});setTimeout(()=>{w.remove();if(t==a){g.classList.add('hit');star(1);$('#am').textContent='🎯 명중! 정답이에요!';conf();setTimeout(()=>{ai++;ar()},1100)}else{g.classList.add('bad');$('#am').textContent='앗, 빗나갔어요! 다시 쏴 봐요.';g.style.animationPlayState='running'}},470)};ae.append(g)})}ar()}
+
+/* 공통 활동 부품: 직접 쓰기 / 고르기 */
+function task(el,t,p,ch,min,ph,done){const d=E('div','card');d.innerHTML=`<span class=badge style="background:${PC[ph]}">${PH[ph]}</span> <b>${t}</b><p>${p}</p>`;const cw=E('div'),ta=E('textarea'),info=E('span'),ok=E('button','btn p','다 했어요! ⭐');ta.rows=3;ta.placeholder='여기에 써 봐요 (예시를 눌러도 돼요)';
+const chk=()=>{const n=ta.value.trim().length;info.textContent=n+' / '+min+'자 ';ok.disabled=n<min};
+ch.forEach(c=>{const b=E('button','chip','➕ '+c);b.onclick=()=>{if(ta.disabled)return;ta.value+=(ta.value?' ':'')+c;chk()};cw.append(b)});ta.oninput=chk;chk();
+ok.onclick=()=>{const v=ta.value.trim();A.push([t,v]);M[t]=v;ta.disabled=true;ok.disabled=true;ok.textContent='✅ 완료';d.classList.add('ok');star(2);conf();done()};d.append(cw,ta,info,ok);el.append(d)}
+function pick(el,t,p,opts,ph,done){const d=E('div','card');d.innerHTML=`<span class=badge style="background:${PC[ph]}">${PH[ph]}</span> <b>${t}</b><p>${p}</p>`;sh(opts).forEach(o=>{const b=E('button','card',o);b.onclick=()=>{if(o==opts[0]){b.classList.add('ok');d.querySelectorAll('button').forEach(x=>x.onclick=null);A.push([t,o]);star(2);conf();done()}else{b.classList.add('no','shake');setTimeout(()=>b.classList.remove('shake'),450)}};d.append(b)});el.append(d)}
+function steps(el,list,fin){let n=0;list.forEach(f=>f(()=>{if(++n==list.length)fin()}))}
+
+/* 4 읽기 전 */
+function s4(el){el.innerHTML='<h2>🔍 읽기 전: 탐정이 되어 봐요!</h2><div class=pass style="text-align:center;font-size:24px"><b>화살나무를 아시나요?</b><br>🌳🏹❓</div>';const T1='제목이나 차례를 보며 내용 예상하기',T2='자신이 알고 있는 내용 떠올리기';
+steps(el,[d=>task(el,'1) '+T1,'제목을 보고 어떤 내용일지 예상해 써 봐요.',['가지가 화살처럼 생긴 나무일 것 같다.','옛날에 화살을 만들 때 쓴 나무일 것 같다.','나무 이름이 왜 화살나무인지 알려 줄 것 같다.','화살 모양 열매가 열리는 나무일 것 같다.','질문으로 시작하니 나무의 특징을 설명하는 글일 것 같다.'],10,0,()=>{M.pred=M['1) '+T1];d()}),d=>task(el,'2) '+T2,'화살나무나 나무에 대해 내가 알고 있는 것을 써 봐요.',['공원에서 빨갛게 단풍 든 나무를 본 적이 있다.','두릅은 봄에 먹는 나물이다.','나무 이름에는 모양이나 쓰임에서 온 까닭이 있다.','우리 아파트 화단에도 비슷한 나무가 있다.','가을에는 나뭇잎이 여러 색으로 물든다.'],10,0,d)],()=>setTimeout(()=>finish(3),900))}
+
+/* 5 읽기 중 */
+const PS=['봄날의 화려한 꽃이 지고 필 때 눈에 띄지 않게 꽃이 피는 식물이 있습니다. 바로 화살나무입니다. 사실 화살나무는 아파트 정원이나 공원, 심지어는 도로변에 많이 심겨 있어 관심만 가지면 쉽게 찾아볼 수 있습니다. 화살나무라는 이름은 어떻게 해서 붙었을까요? 그것은 이 나무의 가지를 보면 알 수 있답니다.','가지에는 코르크 재질의 날개처럼 생긴 것이 2~4줄 보이는데, 그 모습이 화살의 날개처럼 생겨서 화살나무라는 이름이 붙었습니다. 키 작은 떨기나무인 화살나무의 꽃은 정말로 작습니다. 꽃 색도 황록색이라 눈에 잘 들어오지 않습니다. 그래도 꽃받침과 꽃잎이 4장씩 있으며, 수술도 4개 있습니다. 화살나무는 가을에 붉게 단풍이 들었을 때 무척 예쁜 나무랍니다. 게다가 잎이 다 떨어졌을 때 보이는 빨간 열매도 귀엽습니다.','화살나무는 예부터 많은 먹거리를 제공해 왔습니다. 두릅나무의 새순을 먹는 것처럼 화살나무의 새순도 먹을 수 있답니다. 무쳐 먹거나 된장국에 넣어 먹거나 나물밥을 해 먹을 수도 있습니다. 심지어는 봄에 채취하여 말린 뒤 약재로도 썼다고 해요. 이뿐만 아니라 고름을 빼는 데 쓰는 고약의 원료로 화살나무의 날개와 열매를 사용했다고 합니다.'];
+const QZ=[['화살나무라는 이름이 붙은 까닭은?',['가지의 코르크 날개가 화살 날개처럼 생겨서','열매가 화살촉을 닮아서','화살을 만드는 데 쓰여서','잎이 화살 모양이어서']],['가지에 있는 날개는 몇 줄인가요?',['2~4줄','1줄','7~8줄','없다']],['가지 날개의 재질은?',['코르크','쇠','고무','비단']],['화살나무 꽃의 색은?',['황록색','빨간색','파란색','보라색']],['화살나무 꽃의 꽃잎은 몇 장인가요?',['4장','3장','5장','6장']],['화살나무 꽃의 수술은 몇 개인가요?',['4개','2개','6개','10개']],['화살나무는 어떤 나무인가요?',['키 작은 떨기나무','아주 큰 나무','덩굴 식물','풀']],['가을 화살나무 단풍 색은?',['붉은색','노란색','파란색','보라색']],['잎이 다 떨어졌을 때 보이는 것은?',['빨간 열매','노란 열매','하얀 눈꽃','파란 새순']],['화살나무 새순은 어떤 나무의 새순처럼 먹나요?',['두릅나무','소나무','은행나무','감나무']],['글에 나오지 않은 새순 먹는 방법은?',['케이크 만들기','무쳐 먹기','된장국에 넣기','나물밥 해 먹기']],['약재로 쓰려고 화살나무를 채취한 때는?',['봄','여름','가을','겨울']],['고약의 원료로 쓴 화살나무 부분은?',['날개와 열매','뿌리와 잎','줄기와 꽃','씨앗과 껍질']],['고약은 어디에 썼나요?',['고름을 빼는 데','기침을 멈추는 데','배탈에','열을 내리는 데']],['글에서 화살나무가 많이 심긴 곳이 아닌 곳은?',['바다 한가운데','아파트 정원','공원','도로변']],['화살나무 꽃이 피는 때는?',['봄의 화려한 꽃이 진 뒤','한겨울','한여름 낮에만','꽃이 피지 않는다']],['‘화살나무 꽃은 크고 화려하다.’ 맞으면 O, 틀리면 X?',['X (틀림)','O (맞음)']],['‘화살나무는 단풍과 열매도 예쁘다.’ 맞으면 O, 틀리면 X?',['O (맞음)','X (틀림)']]];
+function s5(el){el.innerHTML='<h2>📖 읽기 중: 글을 읽으며 활동해요</h2><div class=pass><b>화살나무를 아시나요?</b> <small>글·사진: 신영준</small>'+PS.map((p,i)=>`<p><b>${i+1}</b> ${p}</p>`).join('')+'</div>';
+steps(el,[d=>pick(el,'3) 글의 중심 생각 파악하기','이 글의 중심 생각으로 가장 알맞은 것은?',['화살나무는 모양이 독특하고 쓰임이 많은 나무이다','화살나무는 키가 아주 큰 나무이다','화살나무는 여름에만 예쁘다','화살나무는 먹을 수 없다'],1,d),d=>{const c=E('div','card');c.innerHTML=`<span class=badge style="background:${PC[1]}">읽기 중</span> <b>4) 각 부분의 중심 내용 파악하기</b><p>각 문단의 중심 내용을 골라 봐요.</p>`;const O=['화살나무 소개와 이름의 까닭','화살나무의 생김새와 특징','화살나무의 쓰임(먹거리·약재)'];const sl=[0,1,2].map(i=>{const s=E('select','',`<option value="">고르기</option>`+sh(O).map(o=>`<option>${o}</option>`).join(''));c.append(E('div','',`<b>${i+1}문단</b> `));c.lastChild.append(s);return s});const b=E('button','btn p','확인 ⭐');b.onclick=()=>{if(sl.every((s,i)=>s.value==O[i])){sl.forEach(s=>s.disabled=true);b.disabled=true;A.push(['4) 각 부분의 중심 내용 파악하기','1문단 소개·이름의 까닭 / 2문단 생김새·특징 / 3문단 쓰임']);star(2);conf();d()}else{b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450)}};c.append(b);el.append(c)},
+d=>task(el,'5) 짐작한 내용이 맞는지 확인하기','내가 읽기 전에 쓴 예상: “'+(M.pred||'')+'” → 글과 비교해 맞았는지 써 봐요.',['내 예상처럼 가지의 날개가 화살 날개를 닮아서 이름이 붙었다.','내 예상과 달랐다. 글에는 화살을 만든 나무라는 말이 없다.','내 예상이 반은 맞았다. 모양에서 이름이 왔기 때문이다.'],10,1,d),
+d=>task(el,'6) 새롭게 안 내용 파악하기','글을 읽고 새롭게 알게 된 내용을 써 봐요.',['꽃받침과 꽃잎이 4장씩, 수술이 4개다.','새순을 두릅처럼 나물로 먹을 수 있다.','날개와 열매를 고약의 원료로 썼다.','꽃이 황록색이라 눈에 잘 띄지 않는다.','가지에 코르크 날개가 2~4줄 있다.'],15,1,d)],()=>{const q=E('div','card');q.innerHTML='<h3>🎮 내용 확인 퀴즈 도전!</h3>';el.append(q);qz(q)})}
+function qz(q){const Q=sh(QZ);let i=0,n=0;function show(){if(i>=Q.length){q.innerHTML=`<h2>🏆 퀴즈 ${n} / ${Q.length}</h2><button class="btn p" id=qf>보상 받기 🎁</button>`;$('#qf').onclick=()=>finish(4);return}
+const[t,o]=Q[i];q.innerHTML=`<h3>📝 내용 확인 퀴즈 (${i+1}/${Q.length}) 맞힌 개수 ${n}</h3><p><b>${t}</b></p>`;sh(o).forEach(x=>{const b=E('button','card',x);b.onclick=()=>{q.querySelectorAll('button').forEach(y=>y.onclick=null);if(x==o[0]){b.classList.add('ok');n++;star(1)}else{b.classList.add('no');[...q.querySelectorAll('button')].find(y=>y.textContent==o[0]).classList.add('ok')}const nx=E('button','btn p','다음 ▶');nx.onclick=()=>{i++;show()};q.append(nx)};q.append(b)})}show()}
+
+/* 6 읽기 후 */
+function s6(el){el.innerHTML='<h2>✍️ 읽기 후: 나만의 정리를 해 봐요</h2>';const k=encodeURIComponent('화살나무');const LK=[['네이버 지식백과에서 화살나무 찾기','https://terms.naver.com/search.naver?query='+k],['구글 이미지에서 화살나무 사진 보기','https://www.google.com/search?tbm=isch&q='+k],['국가생물종지식정보시스템 (검색창에 ‘화살나무’)','https://species.nibr.go.kr'],['국립수목원 (식물 정보)','https://kna.forest.go.kr'],['국립산림과학원','https://www.nifos.go.kr'],['한국민족문화대백과 (검색창에 ‘화살나무’)','https://encykorea.aks.ac.kr']];
+steps(el,[d=>task(el,'7) 글 전체의 내용을 요약하여 정리하기','문단별 중심 내용을 이어서 두세 문장으로 요약해 써 봐요.',['화살나무는 가지에 코르크 날개가 있어서 이런 이름이 붙었다.','꽃은 작고 황록색이지만 단풍과 열매가 예쁘다.','새순은 나물로 먹고 약재와 고약의 원료로도 썼다.','화살나무는 모양이 독특하고 쓰임이 많은 나무이다.'],30,2,d),
+d=>task(el,'8) 더 알고 싶은 내용 생각하기','화살나무에 대해 더 궁금한 점을 써 봐요.',['가지에 왜 날개가 생겼을까?','화살나무 새순 나물은 어떤 맛일까?','우리 학교에 화살나무가 있을까?','단풍이 왜 유난히 붉을까?'],8,2,d),
+d=>{const c=E('div','card',`<b>🔎 조사하기 링크</b>${LK.map(([t,u])=>`<div>🔗 <a href="${u}" target="_blank" rel="noopener">${t}</a></div>`).join('')}<p class=note>⚠️ 야생 식물은 독초와 헷갈리기 쉬워요. 직접 따서 먹지 말고, 꼭 어른과 함께 관찰만 해요!</p>`);el.append(c);task(el,'조사해서 알게 된 내용','위 링크에서 내 궁금증을 조사하고, 알게 된 내용과 출처(사이트 이름)를 써 봐요.',['출처: 네이버 지식백과','출처: 국립수목원'],15,2,d)}],()=>setTimeout(()=>finish(5),900))}
+
+/* 7 상장 */
+function s7(el){conf();el.innerHTML='<h2>🏆 해냈어요!</h2><div class=row><input id=nm placeholder="내 이름을 써 봐요" size=12></div><div class=cert id=ct></div><h3>📒 나의 읽기 기록장</h3>'+A.map(([t,v])=>`<div class=card><b>${t}</b><br>${v}</div>`).join('');const r=()=>$('#ct').innerHTML=`<div style="font-size:60px">🏆🌳🏹</div><h2>화살나무 읽기 박사 상장</h2><h1 style="margin:6px">${($('#nm').value||'__________').replace(/</g,'')}</h1><p>읽기 전·중·후 활동을 끝까지 해냈어요!<br>⭐ ${S.stars}개 · 스티커 6개 모두 획득 🔤🧺🏹🔍📖✍️</p>`;$('#nm').oninput=r;r()}
+upd();go(0);
+</script></body></html>
